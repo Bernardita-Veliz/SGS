@@ -1,0 +1,25 @@
+aside.main-sidebar.sidebar-dark-primary.elevation-4 {
+    background-color: #9e9898;
+    color: #020080;
+}
+p{
+    color: #012970;;
+}
+i.nav.icon{
+    color: #020080;
+}
+::before {
+    color: #020080;
+}
+b{
+    color: #012970;
+}
+.layout-navbar-fixed .wrapper .sidebar-dark-primary .brand-link:not([class*=navbar]) {
+    background-color: #7c7979;
+}
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #73797f;
+}
+nav.main-header.navbar.navbar-expand.navbar-primary.navbar-dark {
+    background-color: #ffffff;
+}
