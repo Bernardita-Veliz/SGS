@@ -28,24 +28,13 @@
 				<tbody>
 					<?php
 					$i = 1;
-					$emisor = $conn->query("SELECT * FROM task_list");
-					$emi_arr[0]= "Unset";
-					while($row=$emisor->fetch_assoc()){
-						$design_arr[$row['id']] =$row['emisor'];
-					}
-					$destino = $conn->query("SELECT * FROM task_list ");
-					$dest_arr[0]= "Unset";
-					while($row=$destino->fetch_assoc()){
-						$dest_arr[$row['id']] =$row['destino'];
-					}
 					$where = "";
 					if($_SESSION['login_type'] == 0)
 						$where = " where t.employee_id = '{$_SESSION['login_id']}' ";
 					elseif($_SESSION['login_type'] == 1)
 						$where = " where e.evaluator_id = {$_SESSION['login_id']} ";
 															
-					$qry = $conn->query("SELECT t.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name FROM task_list t join employee_list e on e.id = t.employee_id $where order by unix_timestamp(t.date_created) asc");
-					
+					$qry = $conn->query("SELECT t.*,concat(e.lastname,', ',e.firstname,' ',e.middlename) as name FROM task_list t inner join employee_list e on e.id = t.employee_id $where order by unix_timestamp(t.date_created) asc");
 					while($row= $qry->fetch_assoc()):
 						$trans = get_html_translation_table(HTML_ENTITIES,ENT_QUOTES);
 						unset($trans["\""], $trans["<"], $trans[">"], $trans["<h2"]);
@@ -60,8 +49,9 @@
 							<p class="truncate"><?php echo strip_tags($desc) ?></p>
 						</td>
 						<td><b><?php echo date("M d, Y",strtotime($row['due_date'])) ?></b></td>
-						<td><b><?php echo isset($emi_arr[$row['emisor_id']]) ?  $emi_arr[$row['emisor_id']] : 'Departamento Desconocido' ?></b></td>
-						<td><b><?php echo isset($dest_arr[$row['destino_id']]) ? $dest_arr[$row['destino_id']] : 'Cargo Desconocido' ?></b></td>
+
+						<td><b><?php echo ucwords($row['emisor']) ?></b></td>
+						<td><b><?php echo ucwords($row['destino']) ?></b></td>
 						<?php if($_SESSION['login_type'] != 0): ?>
 						<td><p><b><?php echo ucwords($row['name']) ?></b></p></td>
 						<?php endif; ?>
@@ -82,19 +72,21 @@
 		                      Acción
 		                    </button>
 			                    <div class="dropdown-menu" style="">
-		                    	<a class="dropdown-item view_task"  name="<?php echo $row['id'] ?>" onClick="view_task(this)" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Ver solicitud</a>	                    	 
-			                    <?php if($_SESSION['login_type'] == 2): ?>
-		                    	<a class="dropdown-item" onClick="manage_task(this)" name="<?php echo $row['id'] ?>" href="javascript:void(0)" dataid="<?php echo $row['id'] ?>">Editar</a>	                    	 		 
-		                    	<?php endif; ?>
-								<a class="dropdown-item" onClick="manage_task(this)" name="<?php echo $row['id'] ?>" href="javascript:void(0)" dataid="<?php echo $row['id'] ?>">Eliminar</a>			                    	
-								<?php if($_SESSION['login_type'] == 0): ?>
-									<?php if($row['status'] != 2): ?>
-									<a class="dropdown-item new_progress" data-pid = '<?php echo $row['pid'] ?>' data-tid = '<?php echo $row['id'] ?>'  data-task = '<?php echo ucwords($row['task']) ?>'  href="javascript:void(0)">Agregar Progreso</a>									
+									<a class="dropdown-item view_task"  name="<?php echo $row['id'] ?>" onClick="view_task(this)" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Ver solicitud</a>	                    	 
+									<?php if($_SESSION['login_type'] == 2): ?>
+									<a class="dropdown-item" onClick="manage_task(this)" name="<?php echo $row['id'] ?>" href="javascript:void(0)" dataid="<?php echo $row['id'] ?>">Editar</a>	                    	 		 
 									<?php endif; ?>
-		                    	<?php endif; ?>
-			                    <a class="dropdown-item view_progress" onClick="view_progress(this)" name="<?php echo ucwords($row['task']) ?>" id="<?php echo $row['id'] ?>"
-								 data-pid = '<?php echo $row['pid'] ?>' data-tid = '<?php echo $row['id'] ?>'  data-task = '<?php echo ucwords($row['task']) ?>'  href="javascript:void(0)">Ver Progreso</a>
+									<!--<a class="dropdown-item delete_task"  onClick="delete_task" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>">Eliminar</a>-->			                    	
+									<?php if($_SESSION['login_type'] == 0): ?>
+										<?php if($row['status'] != 2): ?>
+										<a class="dropdown-item new_progress" data-pid = '<?php echo $row['pid'] ?>' data-tid = '<?php echo $row['id'] ?>'  data-task = '<?php echo ucwords($row['task']) ?>'  href="javascript:void(0)">Agregar Progreso</a>									
+										<?php endif; ?>
+									<?php endif; ?>
+									<a class="dropdown-item view_progress" onClick="view_progress(this)" name="<?php echo ucwords($row['task']) ?>" id="<?php echo $row['id'] ?>"
+									data-pid = '<?php echo $row['pid'] ?>' data-tid = '<?php echo $row['id'] ?>'  data-task = '<?php echo ucwords($row['task']) ?>'  href="javascript:void(0)">Ver Progreso</a>
+									<a class="dropdown-item new_progress" data-pid = '<?php echo $row['pid'] ?>' data-tid = '<?php echo $row['id'] ?>'  data-task = '<?php echo ucwords($row['task']) ?>'  href="javascript:void(0)">Agregar Progreso</a>
 								</div>
+								
 						</td>
 					</tr>	
 				<?php endwhile; ?>
@@ -131,7 +123,7 @@
 	// 	uni_modal("Progeso de: "+$(this).attr('data-task'),"view_progress.php?id="+$(this).attr('data-tid'),'mid-large')
 	// })
 	$('.delete_task').click(function(){
-	_conf("¿Estás seguro de eliminar esta tarea?","delete_employee",[$(this).attr('data-id')])
+	_conf("¿Estás seguro de eliminar esta Solicitud?","delete_task",[$(this).attr('data-id')])
 	})
 	})
 	function delete_task($id){
@@ -150,6 +142,7 @@
 			}
 		})
 	}
+	
 	function manage_task(obj){
 		uni_modal("<i class='fa fa-edit'></i> Editar Tarea","manage_task.php?id="+obj.name,'mid-large');
 	}
@@ -157,7 +150,7 @@
 		uni_modal("Ver solicitud","ver_solicitud.php?id="+obj.name,'mid-large')
 	}
 	function view_progress(obj){
-		uni_modal("Progeso de: "+obj.name,"view_progress.php?id="+obj.id,'mid-large')
+		uni_modal("Progreso de: "+obj.name,"view_progress.php?id="+obj.id,'mid-large')
 	}
 	
 </script>

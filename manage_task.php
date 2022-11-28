@@ -13,9 +13,9 @@ if(isset($_GET['id'])){
 		<div class="col-lg-12">
 			<div class="row">
 				<div class="col-md-5">
-				<div class="form-group">
+					<div class="form-group">
 						<label for="">N° Solicitud: </label>
-						<input type="text" class="form-control form-control-sm" name="nsolicitud" value="<?php echo isset($task) ? $task : '' ?>" required>
+						<input type="text" class="form-control form-control-sm" name="numero" value="<?php echo isset($numero) ? $numero : '' ?>" required>
 					</div>
 					<div class="form-group">
 						<label for="">Titulo breve: </label>
@@ -49,7 +49,7 @@ if(isset($_GET['id'])){
 							$employees = $conn->query("SELECT * FROM department_list ");
 							while($row=$employees->fetch_assoc()):
 							?>
-							<option value="<?php echo $row['id'] ?>" <?php echo isset($department_id) && $department_id == $row['id'] ? 'selected' : '' ?>><?php echo $row['department'] ?></option>
+							<option value="<?php echo $row['department'] ?>" <?php echo isset($designation_id) && $designation_id == $row['id'] ? 'selected' : '' ?>><?php echo $row['department'] ?></option>
 							<?php endwhile; ?>
 						</select>
 					</div>
@@ -58,10 +58,10 @@ if(isset($_GET['id'])){
 						<select name="destino" id="department" class="form-control form-control-sm" required="">
 							<option value=""></option>
 							<?php 
-							$employees = $conn->query("SELECT * FROM department_list ");
+							$employees = $conn->query("SELECT * FROM designation_list ");
 							while($row=$employees->fetch_assoc()):
 							?>
-							<option value="<?php echo $row['id'] ?>" <?php echo isset($department_id) && $department_id == $row['id'] ? 'selected' : '' ?>><?php echo $row['department'] ?></option>
+							<option value="<?php echo $row['designation'] ?>" <?php echo isset($designation_id) && $designation_id == $row['id'] ? 'selected' : '' ?>><?php echo $row['designation'] ?></option>
 							<?php endwhile; ?>
 						</select>
 					</div>
@@ -85,7 +85,7 @@ if(isset($_GET['id'])){
 						<textarea name="description" id="" cols="30" rows="10" class="summernote form-control">
 							<?php echo isset($description) ? $description : '' ?>
 						</textarea>
-						<label for="">Observaciónes: </label>
+						<label for="">Observaciones: </label>
 						<textarea name="observacion" id="" cols="10" rows="5" class="form-control">
 							<?php echo isset($observacion) ? $observacion : '' ?>
 						</textarea>
@@ -102,7 +102,7 @@ if(isset($_GET['id'])){
 	$(document).ready(function(){
 
 	$('#employee_id').select2({
-		placeholder:'Elija empleado',
+		placeholder:'Elija funcionario',
 		width:'100%'
 	})
 
@@ -142,4 +142,21 @@ if(isset($_GET['id'])){
 			}
     	})
     })
+	function delete_task($id){
+		start_load()
+		$.ajax({
+			url:'ajax.php?action=delete_task',
+			method:'POST',
+			data:{id:$id},
+			success:function(resp){
+				if(resp==1){
+					alert_toast("Datos Eliminados",'proceso exitoso')
+					setTimeout(function(){
+						location.reload()
+					},1500)
+
+				}
+			}
+		})
+	}
 </script>

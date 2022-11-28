@@ -3,7 +3,7 @@
 	<div class="card card-outline card-primary">
 		<div class="card-header">
 			<div class="card-tools">
-				<a class="btn btn-block btn-sm btn-default btn-flat border-primary new_designation" href="javascript:void(0)"><i class="fa fa-plus"></i> Agregar Nuevo Cargo</a>
+				<a class="btn btn-block btn-sm btn-default btn-flat border-primary new_designation" href="javascript:void(0)"><i class="fa fa-plus"></i> Agregar Nuevo Centro de salud</a>
 			</div>
 		</div>
 		<div class="card-body">
@@ -17,8 +17,8 @@
 				<thead>
 					<tr>
 						<th class="text-center">#</th>
-						<th>Cargo</th>
-						<th>Descripción</th>
+						<th>Centro de salud</th>
+						<th>Dirección</th>
 						<th>Acción</th>
 					</tr>
 				</thead>
@@ -53,13 +53,13 @@
 	$(document).ready(function(){
 		$('#list').dataTable()
 		$('.new_designation').click(function(){
-			uni_modal("Nuevo Cargo","manage_designation.php")
+			uni_modal("Nuevo centro de salud","manage_designation.php")
 		})
 		$('.manage_designation').click(function(){
-			uni_modal("Gestionar Cargo","manage_designation.php?id="+$(this).attr('data-id'))
+			uni_modal("Gestionar centro de salud","manage_designation.php?id="+$(this).attr('data-id'))
 		})
 	$('.delete_designation').click(function(){
-	_conf("¿Estás seguro de eliminar este cargo?","delete_designation",[$(this).attr('data-id')])
+	_conf("¿Estás seguro de eliminar este centro de salud?","delete_designation",[$(this).attr('data-id')])
 	})
 	})
 	function delete_designation($id){

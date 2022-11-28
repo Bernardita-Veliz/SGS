@@ -12,7 +12,7 @@ if($_SESSION['login_type'] != 1)
               <div class="inner">
                 <h3><?php echo $conn->query("SELECT * FROM department_list ")->num_rows; ?></h3>
 
-                <p>Total de Departamentos</p>
+                <p>Total de Unidades</p>
               </div>
               <div class="icon">
                 <i class="fa fa-th-list"></i>
@@ -24,7 +24,7 @@ if($_SESSION['login_type'] != 1)
               <div class="inner">
                 <h3><?php echo $conn->query("SELECT * FROM designation_list")->num_rows; ?></h3>
 
-                <p>Total de Cargos</p>
+                <p>Total de Centros</p>
               </div>
               <div class="icon">
                 <i class="fa fa-list-alt"></i>
@@ -48,14 +48,14 @@ if($_SESSION['login_type'] != 1)
               <div class="inner">
                 <h3><?php echo $conn->query("SELECT * FROM employee_list")->num_rows; ?></h3>
 
-                <p>Total de Empleados</p>
+                <p>Total de Funcionarios</p>
               </div>
               <div class="icon">
                 <i class="fa fa-user-friends"></i>
               </div>
             </div>
           </div>
-          <div class="col-12 col-sm-6 col-md-4">
+          <!--<div class="col-12 col-sm-6 col-md-4">
             <div class="small-box bg-light shadow-sm border">
               <div class="inner">
                 <h3><?php echo $conn->query("SELECT * FROM evaluator_list")->num_rows; ?></h3>
@@ -66,7 +66,7 @@ if($_SESSION['login_type'] != 1)
                 <i class="fa fa-user-secret"></i>
               </div>
             </div>
-          </div>
+          </div>-->
           <div class="col-12 col-sm-6 col-md-4">
             <div class="small-box bg-light shadow-sm border">
               <div class="inner">

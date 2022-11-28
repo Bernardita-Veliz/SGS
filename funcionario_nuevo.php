@@ -20,7 +20,12 @@
 							<input type="text" name="lastname" class="form-control form-control-sm" required value="<?php echo isset($lastname) ? $lastname : '' ?>">
 						</div>
 						<div class="form-group">
-							<label for="" class="control-label">Departmento</label>
+							<label class="control-label">Correo Electrónico</label>
+							<input type="email" class="form-control form-control-sm" name="email" required value="<?php echo isset($email) ? $email : '' ?>">
+							<small id="#msg"></small>
+						</div>
+						<div class="form-group">
+							<label for="" class="control-label">Unidad</label>
 							<select name="department_id" id="department_id" class="form-control form-control-sm select2">
 								<option value=""></option>
 								<?php 
@@ -32,7 +37,7 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="" class="control-label">Cargo</label>
+							<label for="" class="control-label">Centro de salud</label>
 							<select name="designation_id" id="designation_id" class="form-control form-control-sm select2">
 								<option value=""></option>
 								<?php 
@@ -43,7 +48,7 @@
 								<?php endwhile; ?>
 							</select>
 						</div>
-						<div class="form-group">
+						<!--<div class="form-group">
 							<label for="" class="control-label">Evaluador</label>
 							<select name="evaluator_id" id="evaluator_id" class="form-control form-control-sm select2">
 								<option value=""></option>
@@ -54,7 +59,7 @@
 								<option value="<?php echo $row['id'] ?>" <?php echo isset($evaluator_id) && $evaluator_id == $row['id'] ? 'selected' : '' ?>><?php echo $row['name'] ?></option>
 								<?php endwhile; ?>
 							</select>
-						</div>
+						</div>-->
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
@@ -67,11 +72,11 @@
 						<div class="form-group d-flex justify-content-center align-items-center">
 							<img src="<?php echo isset($avatar) ? 'assets/uploads/'.$avatar :'' ?>" alt="Avatar" id="cimg" class="img-fluid img-thumbnail ">
 						</div>
-						<div class="form-group">
+						<!--<div class="form-group">
 							<label class="control-label">Correo Electrónico</label>
 							<input type="email" class="form-control form-control-sm" name="email" required value="<?php echo isset($email) ? $email : '' ?>">
 							<small id="#msg"></small>
-						</div>
+						</div>-->
 						<div class="form-group">
 							<label class="control-label">Contraseña</label>
 							<input type="password" class="form-control form-control-sm" name="password" <?php echo !isset($id) ? "required":'' ?>>

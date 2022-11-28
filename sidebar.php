@@ -24,28 +24,14 @@
             </a>
           </li> 
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link nav-task_list">
+            <a href="./index.php?page=solicitudes" class="nav-link nav-task_list">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 Solicitudes
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.php?page=solicitud_nueva" class="nav-link nav-new_task tree-item">
-                  <i class="fas fa-angle-right nav-icon"></i>
-                  <p>Agregar Nueva Solicitud</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index.php?page=solicitudes" class="nav-link nav-task_list tree-item">
-                  <i class="fas fa-angle-right nav-icon"></i>
-                  <p>Lista de Solicitudes</p>
-                </a>
-              </li>
-            </ul>
           </li>
+          
           <?php if($_SESSION['login_type'] != 0): ?>
           
         <?php endif; ?>
@@ -59,13 +45,13 @@
             </a>
           </li> 
           <li class="nav-item dropdown">
-            <a href="./index.php?page=cargo" class="nav-link nav-designation">
+            <a href="./index.php?page=designacion" class="nav-link nav-designation">
               <i class="nav-icon fas fa-list-alt"></i>
               <p>
-                Cargos
+                Centros de salud
               </p>
             </a>
-          </li> 
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link nav-edit_employee">
               <i class="nav-icon fas fa-user-friends"></i>

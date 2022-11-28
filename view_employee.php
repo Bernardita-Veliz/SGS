@@ -6,7 +6,7 @@ foreach($qry as $k => $v){
 	$$k = $v;
 }
 $designation= $conn->query("SELECT * FROM designation_list where id = $designation_id ");
-$designation = $designation->num_rows > 0 ? $designation->fetch_array()['designation'] : 'Cargo Desconocido';
+$designation = $designation->num_rows > 0 ? $designation->fetch_array()['designation'] : 'Centro de salud Desconocido';
 $department= $conn->query("SELECT * FROM department_list where id = $department_id ");
 $department = $department->num_rows > 0 ? $department->fetch_array()['department'] : 'Departamento Desconocido';
 $evaluator= $conn->query("SELECT *,concat(lastname,', ',firstname,' ',middlename) as name FROM evaluator_list where id = $evaluator_id ");
@@ -33,7 +33,7 @@ $evaluator = $evaluator->num_rows > 0 ? $evaluator->fetch_array()['name'] : 'Eva
         		<dd><?php echo $department ?></dd>
         	</dl>
           <dl>
-            <dt>Cargo</dt>
+            <dt>Centro de salud</dt>
             <dd><?php echo $designation ?></dd>
           </dl>
           <dl>

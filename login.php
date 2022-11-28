@@ -53,7 +53,7 @@ header("location:index.php?page=home");
           <label for="">Ingreso como</label>
           <select name="login" id="" class="custom-select custom-select-sm">
             <option value="0">Empleado</option>
-            <option value="1">Evaluador</option>
+            <!--<option value="1">Evaluador</option>-->
             <option value="2">Administrador</option>
           </select>
         </div>

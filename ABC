@@ -1,0 +1,32 @@
+<thead>
+					<tr>
+						<th class="text-center">#</th>
+						<th width="20%">Solicitud</th>
+						<th>Fecha de solicitud</th>
+						<th>Emisor</th>
+						<th>Destino</th>
+						<?php if($_SESSION['login_type'] != 0): ?>
+						<th>Asignado a</th>
+						<?php endif; ?>
+						<th>Estado</th>
+						<th>Acción</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					$i = 1;
+					$emisor = $conn->query("SELECT * FROM task_list");
+					$emi_arr[0]= "Unset";
+					while($row=$emisor->fetch_assoc()){
+						$design_arr[$row['id']] =$row['emisor'];
+					}
+					$destino = $conn->query("SELECT * FROM task_list ");
+					$dest_arr[0]= "Unset";
+					while($row=$destino->fetch_assoc()){
+						$dest_arr[$row['id']] =$row['destino'];
+					}
+					$where = "";
+					if($_SESSION['login_type'] == 0)
+						$where = " where t.employee_id = '{$_SESSION['login_id']}' ";
+					elseif($_SESSION['login_type'] == 1)
+						$where = " where e.evaluator_id = {$_SESSION['login_id']} ";

@@ -415,16 +415,13 @@ Class Action {
 			if(!in_array($k, array('id')) && !is_numeric($k)){
 				if($k == 'description')
 					$v = htmlentities(str_replace("'","&#x2019;",$v));
-				if(empty($data)){
-					$data .= " $k='$v' ";
-				}else{
-					$data .= ", $k='$v' ";
-				}
-			}
-		}
-		foreach($_POST as $k => $v){
-			if(!in_array($k, array('id')) && !is_numeric($k)){
 				if($k == 'observacion')
+					$v = htmlentities(str_replace("'","&#x2019;",$v));
+				if($k == 'licitacion')
+					$v = htmlentities(str_replace("'","&#x2019;",$v));
+				if($k == 'chilecompra')
+					$v = htmlentities(str_replace("'","&#x2019;",$v));
+				if($k == 'oc_interno')
 					$v = htmlentities(str_replace("'","&#x2019;",$v));
 				if(empty($data)){
 					$data .= " $k='$v' ";
@@ -432,6 +429,11 @@ Class Action {
 					$data .= ", $k='$v' ";
 				}
 			}
+		}
+		$chk = $this->db->query("SELECT * FROM department_list where department = '$department' and id != '{$id}' ")->num_rows;
+		$chk = $this->db->query("SELECT * FROM designation_list where designation = '$designation' and id != '{$id}' ")->num_rows;
+		if($chk > 0){
+			return 2;
 		}
 		if(empty($id)){
 			$save = $this->db->query("INSERT INTO task_list set $data");

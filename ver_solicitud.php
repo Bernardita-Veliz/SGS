@@ -10,7 +10,11 @@ if(isset($_GET['id'])){
 <div class="container-fluid">
 	<div class="col-lg-12">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-5">
+				<dl>
+					<dt><b class="border-bottom border-primary">Numero de Solicitud</b></dt>
+					<dd><?php echo ucwords($numero) ?></dd>
+				</dl>
 				<dl>
 					<dt><b class="border-bottom border-primary">Solicitud</b></dt>
 					<dd><?php echo ucwords($task) ?></dd>
@@ -19,8 +23,16 @@ if(isset($_GET['id'])){
 					<dt><b class="border-bottom border-primary">Asignar a</b></dt>
 					<dd><?php echo ucwords($name) ?></dd>
 				</dl>
+				<dl>
+					<dt><b class="border-bottom border-primary">Emisor</b></dt>
+					<dd><?php echo ucwords($emisor) ?></dd>
+				</dl>
+				<dl>
+					<dt><b class="border-bottom border-primary">Destino</b></dt>
+					<dd><?php echo ucwords($destino) ?></dd>
+				</dl>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<dl>
 					<dt><b class="border-bottom border-primary">Fecha de Solicitud</b></dt>
 					<dd><?php echo date("m d,Y",strtotime($due_date)) ?></dd>
@@ -43,6 +55,24 @@ if(isset($_GET['id'])){
 			        	?>
 					</dd>
 				</dl>
+				<dl>
+					<dt><b class="border-bottom border-primary">Observaciónes</b></dt>
+					<dd><?php echo ucwords($observacion) ?></dd>
+				</dl>
+			</div>
+			<div class="col-md-2">
+				<dl>
+					<dt><b class="border-bottom border-primary">N° Licitación</b></dt>
+					<dd><?php echo ucwords($licitacion) ?></dd>
+				</dl>
+				<dl>
+					<dt><b class="border-bottom border-primary">N° Chilecompra</b></dt>
+					<dd><?php echo ucwords($chilecompra) ?></dd>
+				</dl>
+				<dl>
+					<dt><b class="border-bottom border-primary">N° OC Interno</b></dt>
+					<dd><?php echo ucwords($oc_interno) ?></dd>
+				</dl>				
 			</div>
 		</div>
 		<div class="row">

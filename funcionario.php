@@ -13,8 +13,8 @@
 						<th class="text-center">#</th>
 						<th>Nombre</th>
 						<th>Correo Electrónico</th>
-						<th>Departmento</th>
-						<th>Cargo</th>
+						<th>Unidad</th>
+						<th>Centro de salud</th>
 						<th>Acción</th>
 					</tr>
 				</thead>
@@ -39,7 +39,7 @@
 						<td><b><?php echo ucwords($row['name']) ?></b></td>
 						<td><b><?php echo $row['email'] ?></b></td>
 						<td><b><?php echo isset($dept_arr[$row['department_id']]) ? $dept_arr[$row['department_id']] : 'Departamento Desconocido' ?></b></td>
-						<td><b><?php echo isset($design_arr[$row['designation_id']]) ? $design_arr[$row['designation_id']] : 'Cargo Desconocido' ?></b></td>
+						<td><b><?php echo isset($design_arr[$row['designation_id']]) ? $design_arr[$row['designation_id']] : 'Centro de salud Desconocido' ?></b></td>
 						<td class="text-center">
 							<button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 		                      Acción

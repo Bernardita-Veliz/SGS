@@ -102,7 +102,7 @@ if(isset($_GET['id'])){
 	$(document).ready(function(){
 
 	$('#employee_id').select2({
-		placeholder:'Elija empleado',
+		placeholder:'Elija funcionario',
 		width:'100%'
 	})
 
